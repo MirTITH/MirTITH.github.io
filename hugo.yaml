@@ -1,6 +1,5 @@
 # Hugo configuration file
-title: My Site
-
+title: Light Blog
 # import hextra as module
 module:
   imports:
@@ -25,7 +24,7 @@ menu:
       pageRef: /about
       weight: 2
     - name: Contact ↗
-      url: "https://github.com/imfing"
+      url: "https://github.com/MirTITH"
       weight: 3
     - name: Search
       weight: 4
@@ -33,14 +32,9 @@ menu:
         type: search
     - name: GitHub
       weight: 5
-      url: "https://github.com/imfing/hextra-starter-template"
+      url: "https://github.com/MirTITH/MirTITH.github.io"
       params:
         icon: github
-    - name: Twitter
-      weight: 6
-      url: "https://twitter.com/"
-      params:
-        icon: x-twitter
 
 params:
   navbar:

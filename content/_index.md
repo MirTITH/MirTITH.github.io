@@ -1,5 +1,5 @@
 ---
-title: My Site
+title: 🐑
 toc: false
 ---
 
@@ -12,6 +12,9 @@ This is the landing page.
   {{< card link="about" title="About" icon="user" >}}
 {{< /cards >}}
 
-## Documentation
+> [!INFO]
+> 目前是毛坯房，施工中...
 
-For more information, visit [Hextra](https://imfing.github.io/hextra).
+<!-- ## Documentation
+
+For more information, visit [Hextra](https://imfing.github.io/hextra). -->
