@@ -1,5 +1,5 @@
 # Hugo configuration file
-title: Light Blog
+title: 🐑's Blog
 # import hextra as module
 module:
   imports:
@@ -17,15 +17,18 @@ markup:
 
 menu:
   main:
-    - name: Docs
-      pageRef: /docs
+    - name: 博客
+      pageRef: /blog
       weight: 1
-    - name: About
-      pageRef: /about
+    - name: 文档
+      pageRef: /docs
       weight: 2
-    - name: Contact ↗
-      url: "https://github.com/MirTITH"
-      weight: 3
+    # - name: About
+    #   pageRef: /about
+    #   weight: 2
+    # - name: Contact ↗
+    #   url: "https://github.com/MirTITH"
+    #   weight: 3
     - name: Search
       weight: 4
       params:
@@ -47,4 +50,4 @@ params:
 
   editURL:
     enable: true
-    base: "https://github.com/imfing/hextra-starter-template/edit/main/content"
+    base: "https://github.com/MirTITH/MirTITH.github.io/edit/main/content"
