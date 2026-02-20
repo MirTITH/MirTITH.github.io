@@ -40,6 +40,10 @@ menu:
         icon: github
 
 params:
+  author:
+    name: "MirTITH"
+    email: ""
+
   navbar:
     displayTitle: true
     displayLogo: false
