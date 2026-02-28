@@ -1,0 +1,75 @@
+# This script is used to set up the ROS 2 environment for the user.
+# Set ROS2_RC_ROS_DISTRO to your ROS 2 distribution if necessary.
+
+# ROS2_RC_ROS_DOMAIN_ID=42
+ROS2_RC_ROS_DISTRO=humble
+ROS2_RC_CURRENT_SHELL=$(ps -p $$ -o comm=)
+
+__ros2_rc_check_shell() {
+    case "$ROS2_RC_CURRENT_SHELL" in
+    bash | zsh)
+        return 0
+        ;;
+    *)
+        echo "Unsupported shell: $ROS2_RC_CURRENT_SHELL"
+        return 1
+        ;;
+    esac
+}
+
+__ros2_rc_source_system_ros2() {
+    alias rosdep_install='rosdep install --from-paths src --ignore-src -r -y'
+
+    if [ -n "$ROS2_RC_ROS_DOMAIN_ID" ]; then
+        echo "Setting ROS_DOMAIN_ID to $ROS2_RC_ROS_DOMAIN_ID"
+        export ROS_DOMAIN_ID=$ROS2_RC_ROS_DOMAIN_ID
+    fi
+
+    source /opt/ros/$ROS2_RC_ROS_DISTRO/setup.$ROS2_RC_CURRENT_SHELL
+    source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.$ROS2_RC_CURRENT_SHELL
+    source /usr/share/colcon_cd/function/colcon_cd.sh
+    export _colcon_cd_root=/opt/ros/$ROS2_RC_ROS_DISTRO/
+}
+
+__ros2_rc_source_ws() {
+    if [ ! -f "$1/install/setup.$ROS2_RC_CURRENT_SHELL" ]; then
+        echo "No such file: $1/install/setup.$ROS2_RC_CURRENT_SHELL"
+        return 1
+    fi
+
+    source "$1/install/setup.$ROS2_RC_CURRENT_SHELL"
+}
+
+__ros2_rc_post_source() {
+    if [ "$ROS2_RC_CURRENT_SHELL" = "zsh" ]; then
+        eval "$(register-python-argcomplete3 ros2)"
+        eval "$(register-python-argcomplete3 colcon)"
+    fi
+}
+
+rr() {
+    __ros2_rc_check_shell || return 1
+
+    __ros2_rc_source_system_ros2
+
+    # __ros2_rc_source_ws ~/Documents/ros2/moveit2_main_ws
+
+    # 若参数中包含 --no-post 则跳过 __ros2_rc_post_source
+    for _arg in "$@"; do
+        [ "$_arg" = "--no-post" ] && skip_post=1 && break
+    done
+    if [ -z "${skip_post}" ]; then
+        __ros2_rc_post_source
+    fi
+}
+
+rs() {
+    __ros2_rc_check_shell || return 1
+
+    rr --no-post
+    __ros2_rc_source_ws .
+    __ros2_rc_post_source
+}
+
+# Automatically source the ROS 2 environment
+# rr
