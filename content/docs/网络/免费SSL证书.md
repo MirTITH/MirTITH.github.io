@@ -11,7 +11,7 @@ next: docs/网络/nginx反向代理与https/
 
 对于不在公网的服务器，可以使用 DNS 验证的方式来申请证书。这种方式要求你添加一条指定的 DNS 记录以证明域名确实属于自己，在验证完成后可以删除这条记录。为了自动化这个过程（由 acme.sh 实现），需要域名提供商的 API 访问权限。
 
-对于阿里云域名，可以创建一个仅拥有 DNS 操作权限的 RAM 用户，然后使用这个用户的 AccessKey 来实现自动化 DNS 验证。方法请参考 [基于阿里云 AccessKey 的 DDNS](../ddns/#基于阿里云-accesskey-的-ddns)。
+对于阿里云域名，可以创建一个仅拥有 DNS 操作权限的 RAM 用户，然后使用这个用户的 AccessKey 来实现自动化 DNS 验证。方法请参考 [基于阿里云 AccessKey 的 DDNS → 创建 RAM 用户](../ddns/#1-创建-ram-用户)。
 
 得到 AccessKey 后，按照以下步骤操作：
 
