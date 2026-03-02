@@ -49,7 +49,7 @@ sudo su
 
 ### 2. 申请证书
 
-> [!NOTE] 以下命令均需以 root 用户运行
+> [!NOTE] 以下命令均需以 root 用户运行（即在 `sudo su` 下）
 
 ```bash
 # 假设你的域名是 example.com，托管在阿里云
@@ -77,7 +77,7 @@ sudo pacman -S nginx
 sudo systemctl enable --now nginx
 ```
 
-> [!NOTE] 以下命令均需以 root 用户运行
+> [!NOTE] 以下命令均需以 root 用户运行（即在 `sudo su` 下）
 
 ```bash
 mkdir -p /etc/nginx/ssl/$MY_DOMAIN
