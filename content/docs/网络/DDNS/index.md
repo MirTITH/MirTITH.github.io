@@ -78,12 +78,14 @@ sudo nano /etc/ddns/config.json
     "*.hostname.example.com"
   ], // IPv4 域名
   "index4": [
+    "regex:^(10\\.|192\\.168\\.).*", // 匹配 10.x.x.x 或 192.168.x.x 的私有地址
     "default"
   ], // IPv4地址来源
   "ipv6": [
     "hostname.ipv6.example.com"
   ], // IPv6 域名
   "index6": [
+    "regex:^[23][0-9a-fA-F]{0,3}:.*",
     "default"
   ], // IPv6地址来源
   "ttl": 600 // DNS记录TTL（秒）
