@@ -110,5 +110,8 @@ conda install icu=70.1
 ```
 
 > [!TIP]
-> 可以使用 `conda search icu` 来查看可用版本。  
-> `conda` 太慢了，可以使用 `mamba search icu`
+> 查看 conda 包的可用版本：
+> ```bash
+> conda search icu # 速度非常慢
+> mamba search icu # 需额外安装，但快很多
+> ```
