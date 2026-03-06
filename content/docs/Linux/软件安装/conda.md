@@ -45,24 +45,40 @@ Conda 生态涉及多个相关概念，下面分三层介绍：
 
 ### Miniforge（推荐）
 
-安装：
+**安装**
 
 ```bash
 wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 bash Miniforge3-$(uname)-$(uname -m).sh
 ```
 
-上面的脚本会提示是否初始化 bash，但不会初始化 zsh，因此需要手动初始化：
+上面的脚本会提示是否初始化 bash，但不会初始化 zsh。如果使用 zsh 需要手动初始化：
 
 ```bash
 ~/miniforge3/bin/conda init zsh
 ~/miniforge3/bin/mamba shell init -s zsh
 ```
 
-取消默认进入 base 环境：
+推荐再安装 [Zsh 补全](#conda-zsh-补全)
+
+**取消默认进入 base 环境**
 ```
 conda config --set auto_activate false
 ```
+
+**换源**
+
+编辑 `~/.condarc`，添加以下内容：
+
+```yaml
+channels:
+  - conda-forge
+mirrored_channels:
+  conda-forge:
+    - https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge
+```
+
+运行 `conda clean -i` 清除索引缓存，保证用的是镜像站提供的索引。
 
 ### Miniconda
 
@@ -82,8 +98,17 @@ rm -rf ~/miniconda3/miniconda.sh
 ~/miniconda3/bin/conda init zsh
 ```
 
+推荐再安装 [Zsh 补全](#conda-zsh-补全)
+
 取消默认进入 base 环境：
 
 ```shell
 conda config --set auto_activate false
+```
+
+### Conda Zsh 补全
+
+```bash
+# Arch Linux 用户可以直接安装 conda-zsh-completion 包
+paru -S conda-zsh-completion
 ```
