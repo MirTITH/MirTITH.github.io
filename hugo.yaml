@@ -1,5 +1,7 @@
 # Hugo configuration file
 title: 🐑's Blog
+defaultContentLanguage: zh-cn
+
 # import hextra as module
 module:
   imports:
