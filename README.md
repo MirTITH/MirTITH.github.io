@@ -30,7 +30,7 @@ hugo server --buildDrafts --disableFastRender
 在项目根目录运行：
 
 ```bash
-# 添加新文档
+# 添加新知识库文档
 hugo new content/docs/目录/文章名.md
 
 # 添加新博客文章

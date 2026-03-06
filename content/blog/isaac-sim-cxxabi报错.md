@@ -9,6 +9,8 @@ draft: false
 
 在 Ubuntu 22.04 上安装 Isaac Sim 5.1.0，再使用 [Installation using Isaac Sim Pre-built Binaries](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/binaries_installation.html#installation-using-isaac-sim-pre-built-binaries) 方式安装 Isaac Lab，最后使用 `./isaaclab.sh --conda` 创建 conda 环境，在 conda 环境中运行训练脚本时，报错如下：
 
+<!--more-->
+
 {{% details title="点击展开" closed="true" %}}
 
 ```

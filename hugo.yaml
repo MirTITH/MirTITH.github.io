@@ -22,7 +22,7 @@ menu:
     - name: 博客
       pageRef: /blog
       weight: 1
-    - name: 文档
+    - name: 知识库
       pageRef: /docs
       weight: 2
     # - name: About
