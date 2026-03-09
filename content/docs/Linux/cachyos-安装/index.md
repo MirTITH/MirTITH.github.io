@@ -259,7 +259,9 @@ paru -S --needed python-pyqt5-webengine feeluown-full
 ### KDE 设置建议
 
 - 鼠标：禁用指针加速度
-- 键盘：NumLock 在开机时的状态：打开
+- 键盘：
+  - 键盘：NumLock 在开机时的状态：打开
+  - 快捷键->窗口管理->切换到下一桌面（不是切换到*下方*桌面）：添加 `Meta+Tab` 快捷键
 - 显示和监视器→屏幕边缘：左上角改为无操作
 - 颜色和主题
   - 全局主题：Breeze 微风阴阳

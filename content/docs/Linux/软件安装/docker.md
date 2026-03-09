@@ -3,7 +3,7 @@ title: Docker
 type: docs
 ---
 
-## 准备工作：将 docker 数据目录放到单独的 btrfs 子卷上
+## 准备工作：将 docker 数据目录放到单独的 btrfs 子卷上 （可选）
 
 如果使用 btrfs 文件系统作为根目录并且配置了快照，建议将 docker 的数据目录放到单独的 btrfs 子卷上，防止对 docker 打快照。
 
