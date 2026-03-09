@@ -75,7 +75,9 @@ kate cachyos-mirrorlist cachyos-v3-mirrorlist cachyos-v4-mirrorlist mirrorlist
 sudo pacman -Syy
 ```
 
-然后启动安装程序。安装时最好选择英文语言，使得家目录文件夹命名为英文。
+### 3. 启动安装程序
+
+启动安装程序。安装时最好选择英文语言，使得家目录文件夹命名为英文。
 
 ## 安装后配置
 
@@ -113,7 +115,7 @@ git config --global core.quotepath false
 
 ```bash
 paru -S --needed vi
-sudo visudo
+sudo visudo /etc/sudoers.d/05_proxy
 ```
 
 添加（优先尝试这一行）：
@@ -137,8 +139,39 @@ paru -S sparkle
 ### 字体与常用软件
 
 ```bash
-paru -S --needed ttf-lxgw-wenkai ttf-lxgw-wenkai-mono adobe-source-han-sans-otc-fonts noto-fonts-cjk typora visual-studio-code-bin moonlight-qt mission-center
+paru -S --needed ttf-lxgw-wenkai ttf-lxgw-wenkai-mono noto-fonts-cjk typora visual-studio-code-bin moonlight-qt mission-center
 ```
+
+### 解决部分软件显示为日文字形问题
+
+创建文件 `~/.config/fontconfig/conf.d/64-language-selector-prefer.conf`：
+
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+  <alias>
+    <family>sans-serif</family>
+    <prefer>
+      <family>Noto Sans CJK SC</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>serif</family>
+    <prefer>
+      <family>Noto Serif CJK SC</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>monospace</family>
+    <prefer>
+      <family>Noto Sans Mono CJK SC</family>
+    </prefer>
+  </alias>
+</fontconfig>
+```
+
+> 来自 Claude
 
 ### 输入法（Wayland + Fcitx5）
 
