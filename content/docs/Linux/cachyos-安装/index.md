@@ -171,6 +171,12 @@ paru -S --needed ttf-lxgw-wenkai ttf-lxgw-wenkai-mono noto-fonts-cjk typora visu
 </fontconfig>
 ```
 
+然后刷新字体缓存：
+
+```bash
+fc-cache -fv
+```
+
 > 来自 Claude
 
 ### 输入法（Wayland + Fcitx5）
