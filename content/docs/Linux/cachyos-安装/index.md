@@ -303,3 +303,23 @@ xdg-user-dirs-update --force
 ```bash
 kate ~/.local/share/user-places.xbel
 ```
+
+### 设置 zsh
+
+设置 zsh 为默认 shell：
+
+```bash
+chsh -s /bin/zsh
+```
+
+打开 `/usr/share/cachyos-zsh-config/cachyos-config.zsh`，进行下面的操作：
+- 注释掉 `ENABLE_CORRECTION="true"`
+- 添加 z （快速目录切换工具）插件：
+  找到下面这行：
+  ```bash
+  [[ -z "${plugins[*]}" ]] && plugins=(git fzf extract)
+  ```
+  修改为：
+  ```bash
+  [[ -z "${plugins[*]}" ]] && plugins=(git fzf extract z)
+  ```
