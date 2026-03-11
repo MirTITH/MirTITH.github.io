@@ -139,7 +139,7 @@ paru -S sparkle
 ### 字体与常用软件
 
 ```bash
-paru -S --needed ttf-lxgw-wenkai ttf-lxgw-wenkai-mono noto-fonts-cjk typora visual-studio-code-bin moonlight-qt mission-center
+paru -S --needed ttf-lxgw-wenkai ttf-lxgw-wenkai-mono noto-fonts-cjk typora visual-studio-code-bin moonlight-qt mission-center firefox-i18n-zh-cn
 ```
 
 ### 解决部分软件显示为日文字形问题
