@@ -49,6 +49,10 @@ UUID=00efe411-cb8a-42f3-8fab-2c12840cf6df /var/lib/docker       btrfs   subvol=@
 UUID=00efe411-cb8a-42f3-8fab-2c12840cf6df /var/lib/containerd   btrfs   subvol=@containerd,defaults,noatime,compress=zstd:1 0 0
 ```
 
+> [!NOTE]
+> compress=zstd:1 是可选项，表示启用压缩，压缩级别为 1，压缩级别越高压缩率越好，但 CPU 占用也越高。  
+> 压缩级别建议：固态硬盘 1～3，机械硬盘 3～5。
+
 之后执行以下命令挂载：
 
 ```bash
@@ -86,56 +90,69 @@ sudo rmdir /mnt/root
    sudo sh get-docker.sh
    ```
 
-2. 使 docker 命令不需要 root 运行
+2. （可选）[修改配置以使用传统的 overlay2 存储驱动](#修改配置以使用传统的-overlay2-存储驱动)
+
+3. 使 docker 命令不需要 root 运行
 
    ```shell
    sudo groupadd docker
    sudo usermod -aG docker $USER
    ```
 
-3. Log out and log back in so that your group membership is re-evaluated.
+4. Log out and log back in so that your group membership is re-evaluated.
 
-4. Test your docker installation
+5. Test your docker installation
 
    ```shell
    docker run hello-world
    ```
 
-5. 安装 Nvidia Container Toolkit：
+6. （可选）安装 Nvidia Container Toolkit：
    1. 打开链接：<https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html>
    2. 按照网页中的指引，在主机中安装 nvidia-container-toolkit
    3. 执行网页中 Configuring Docker 的部分，注意不需要执行 Rootless mode
 
-### For Manjaro/Arch Linux
+完成！
 
-```shell
-# 安装
-paru -S docker docker-buildx
+### For Arch Linux
 
-# 启动和开机自启
-sudo systemctl enable --now docker.service
+1. 安装
+   ```shell
+   paru -S docker docker-buildx
+   ```
 
-# 检查
-sudo docker version
-sudo docker info
+2. （可选）[修改配置以使用传统的 overlay2 存储驱动](#修改配置以使用传统的-overlay2-存储驱动)
 
-# 使得运行 docker 命令不需要 root 权限，重启生效
-sudo usermod -aG docker $USER
-reboot
-```
+3. 启动和开机自启
+   ```shell
+   sudo systemctl enable --now docker.service
+   ```
 
-接下来安装 NVIDIA Container Toolkit，使 docker 能够使用 NVIDIA GPU
+4. 检查
+   ```shell
+   sudo docker version
+   sudo docker info
+   ```
 
-```shell
-# 安装
-sudo pacman -S nvidia-container-toolkit
+5. 使得运行 docker 命令不需要 root 权限，重启生效
+   ```shell
+   sudo usermod -aG docker $USER
+   reboot
+   ```
 
-# 配置
-sudo nvidia-ctk runtime configure --runtime=docker
-sudo systemctl restart docker
-```
+6. （可选）安装 NVIDIA Container Toolkit，使 docker 能够使用 NVIDIA GPU
+   ```shell
+   # 安装
+   sudo pacman -S nvidia-container-toolkit
 
-## 修改配置以使用传统的 overlay2 存储驱动
+   # 配置
+   sudo nvidia-ctk runtime configure --runtime=docker
+   sudo systemctl restart docker
+   ```
+
+完成！
+
+### 修改配置以使用传统的 overlay2 存储驱动
 
 Docker 在 29.0 版本之后默认使用 [containerd image store](https://docs.docker.com/engine/storage/containerd/)，而不是传统的 overlay2 存储驱动。
 
@@ -177,7 +194,7 @@ sudo systemctl start docker
 **验证：**
 
 ```bash
-docker info | grep 'Storage Driver'
+sudo docker info | grep 'Storage Driver'
 # 输出内容应该是：
 # Storage Driver: overlay2
 # 而不是：
@@ -186,7 +203,9 @@ docker info | grep 'Storage Driver'
 
 > 参考自：<https://docs.docker.com/engine/storage/drivers/overlayfs-driver/>
 
-## docker 运行 GUI 程序
+## 技巧
+
+### docker 运行 GUI 程序
 
 ```shell
 # Manjaro/Arch Linux 需要安装 xorg-xhost
@@ -204,15 +223,15 @@ sudo apt install x11-apps
 xclock
 ```
 
-## docker 代理上网
+### docker 代理上网
 
 > 请看：  
 > 1. docker daemon 配置代理（适用于 docker pull）：<https://docs.docker.com/engine/daemon/proxy/>
 > 2. docker CLI 配置代理（适用于构建阶段、运行容器时）：<https://docs.docker.com/engine/cli/proxy/>
 
-### 太长不看版
+#### 太长不看版
 
-#### docker daemon 配置代理   
+##### docker daemon 配置代理   
 
 1. 创建文件：
    ```bash
@@ -238,7 +257,7 @@ xclock
    # Environment=HTTP_PROXY=http://localhost:7890 HTTPS_PROXY=http://localhost:7890 NO_PROXY=localhost,127.0.0.1,::1,10.0.0.0/8,192.168.0.0/16,mirrors.osa.moe,.osa.moe,.internal,.local
    ```
 
-#### docker CLI 配置代理
+##### docker CLI 配置代理
 
 ```bash
 docker build \
