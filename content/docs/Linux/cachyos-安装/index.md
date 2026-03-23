@@ -139,7 +139,7 @@ paru -S sparkle
 ### 字体与常用软件
 
 ```bash
-paru -S --needed ttf-lxgw-wenkai ttf-lxgw-wenkai-mono noto-fonts-cjk typora visual-studio-code-bin moonlight-qt mission-center
+paru -S --needed ttf-lxgw-wenkai ttf-lxgw-wenkai-mono noto-fonts-cjk typora visual-studio-code-bin moonlight-qt mission-center firefox-i18n-zh-cn
 ```
 
 ### 解决部分软件显示为日文字形问题
@@ -279,6 +279,7 @@ paru -S --needed python-pyqt5-webengine feeluown-full
     - 虚拟桌面：增加行数，添加一个桌面，勾选循环切换。
 - 登录屏幕：勾选自动登录，点击应用 Plasma 设置（可配合 KDE 启动时立刻锁定）
 - 电源管理：空闲时无操作，关闭屏幕 30 分钟，锁屏延迟约 20 秒。
+- 会话→桌面会话：登陆自动启动应用程序：启动为空会话
 
 **配置 KDE 启动时立刻锁定（配合自动登陆）**
 
