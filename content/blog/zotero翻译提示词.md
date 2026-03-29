@@ -1,7 +1,7 @@
 ---
 title: "Zotero翻译提示词"
 date: 2026-03-23T10:55:01+08:00
-draft: true
+draft: false
 ---
 
 <!--more-->
