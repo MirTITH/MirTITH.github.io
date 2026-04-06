@@ -330,3 +330,18 @@ chsh -s /bin/zsh
   ```bash
   [[ -z "${plugins[*]}" ]] && plugins=(git fzf extract z)
   ```
+
+### 卸载 Plymouth
+
+Plymouth 用来在系统开机时显示动画，但它有时会导致开机卡住。如果你不需要开机动画，可以卸载它：
+
+1. 编辑 `/etc/mkinitcpio.conf`，找到 `HOOKS` 行，删除其中的 `plymouth`，然后执行：
+  ```
+  sudo mkinitcpio -P
+  ```
+  以重新生成 initramfs。
+2. （用于显示开机日志，可选）编辑 `/etc/default/grub`，找到 `GRUB_CMDLINE_LINUX_DEFAULT` 行，删除其中的 `quiet splash`
+3. 卸载 Plymouth：
+  ```bash
+  sudo pacman -Rnsc plymouth
+  ```
