@@ -81,6 +81,14 @@ sudo pacman -Syy
 
 ## 安装后配置
 
+### 删除 `cachyos-rate-mirrors` 包
+
+这个包会自动测速并更新镜像列表，但常常选择到很慢的镜像，不如删除它，然后手动配置镜像列表（见[换源](#2-换源)）。
+
+```bash
+sudo pacman -Rns cachyos-rate-mirrors
+```
+
 ### 启用 archlinuxcn
 
 编辑 `/etc/pacman.conf`，在末尾添加：
