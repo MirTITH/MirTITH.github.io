@@ -56,6 +56,55 @@ type: docs
 | 国内推荐   | `119.29.29.29, 1.2.4.8`   |
 | 国内 IPv6  | `2402:4e00::, 240c::6666` |
 
+## （可选）配置 zram
+
+zram 可以压缩内存中不活跃的数据，提供更大的可用内存空间。Ubuntu 主要有两种实现方式：
+- **zram-tools**（配置起来更简单）
+- **systemd-zram-generator**（更灵活，适合高级用户）
+
+下面仅介绍 zram-tools 的配置方法：
+
+1. **安装 zram-tools**
+   ```bash
+   sudo apt install zram-tools
+   ```
+
+2. **编辑配置文件 `/etc/default/zramswap`**
+   ```bash
+   sudo nano /etc/default/zramswap
+   ```
+   常用参数示例：
+
+   ```ini
+   # 压缩算法（推荐 lz4 速度快，zstd 压缩率高）
+   ALGO=lz4
+
+   # 使用内存百分比（默认 50%）
+   PERCENT=50
+
+   # 或者固定大小（MB），与 PERCENT 二选一
+   # SIZE=4096
+
+   # 优先级（越高越优先使用 zram）
+   PRIORITY=100
+   ```
+
+3. **启动/重启服务**
+   ```bash
+   sudo systemctl restart zramswap
+   sudo systemctl enable zramswap
+   ```
+
+**验证 zram 状态：**
+
+   ```bash
+   # 查看 swap 状态
+   swapon --show
+
+   # 查看 zram 详细信息
+   zramctl
+   ```
+
 ## GRUB 超时设置
 
 ```bash
