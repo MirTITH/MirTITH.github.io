@@ -156,7 +156,7 @@ sudo update-initramfs -u
 
 ## 禁用鼠标键盘唤醒
 
-[转到配置文件和脚本](https://github.com/MirTITH/MirTITH.github.io/tree/main/content/content/docs/Linux/ubuntu-安装指南/config_files)
+[转到配置文件和脚本](https://github.com/MirTITH/MirTITH.github.io/tree/main/content/docs/Linux/ubuntu-安装指南/config_files)
 
 ### 对于 G304 鼠标
 
