@@ -1,27 +1,55 @@
 ---
-title: Ubuntu 安装
+title: Ubuntu 安装指南
 type: docs
 ---
 
-## （可选）修改 efi 位置
+> [!note] 说明  
+> 本文档提供 Ubuntu 系统安装后的配置指南，包括换源、系统优化、常用软件安装等内容。
+
+---
+
+## 一、修改 EFI 引导位置（可选）
 
 > Windows 和 Ubuntu 双系统时，即使选择将这俩系统安装在不同的硬盘上，Ubuntu 安装程序也可能会将 EFI 引导安装在 Windows 的磁盘上。如果发生这种情况，建议按照以下步骤将 Ubuntu 的 EFI 引导迁移到 Ubuntu 所在的磁盘上，否则拔掉 Windows 磁盘后 Ubuntu 将无法启动。
 
-1. 如果 Ubuntu 磁盘上没有 EFI 分区，则创建一个
-1. `lsblk` 找到 Ubuntu 硬盘上的 EFI 设备分区，如 `nvme1n1p5`
-1. `sudo blkid /dev/设备分区` 得到 UUID. 如 `5C51-1F97`
-1. 修改 `/etc/fstab` 中 `UUID=XXXX-XXXX /boot/efi vfat umask=0077 0 1` 行，将 `XXXX-XXXX` 换成第 3 步中得到的 UUID
-1. 删除 `/boot/efi/EFI/ubuntu`
-1. 卸载旧分区，挂载新分区： 
-    ```shell
-    sudo umount /boot/efi
-    sudo mount /boot/efi
-    ```
-1. 更新 grub：
-    ```shell
-    sudo grub-install
-    sudo update-grub
-    ```
+### 操作步骤
+
+1. **检查 EFI 分区**  
+   如果 Ubuntu 磁盘上没有 EFI 分区，则创建一个
+
+2. **查找 EFI 设备分区**  
+   ```bash
+   lsblk
+   ```
+   找到 Ubuntu 硬盘上的 EFI 设备分区，如 `nvme1n1p5`
+
+3. **获取 UUID**  
+   ```bash
+   sudo blkid /dev/设备分区
+   ```
+   得到 UUID，如 `5C51-1F97`
+
+4. **修改 /etc/fstab**  
+   修改 `/etc/fstab` 中 `UUID=XXXX-XXXX /boot/efi vfat umask=0077 0 1` 行，将 `XXXX-XXXX` 换成第 3 步中得到的 UUID
+
+5. **删除旧引导**  
+   ```bash
+   sudo rm -rf /boot/efi/EFI/ubuntu
+   ```
+
+6. **卸载旧分区，挂载新分区**  
+   ```bash
+   sudo umount /boot/efi
+   sudo mount /dev/新分区 /boot/efi
+   ```
+
+7. **更新 GRUB**  
+   ```bash
+   sudo grub-install
+   sudo update-grub
+   ```
+
+---
 
 ## 换源
 
@@ -115,7 +143,7 @@ pip config unset global.index-url
 timedatectl set-local-rtc 1 --adjust-system-clock
 ```
 
-## GRUB2 timeout和关机timeout
+## GRUB2 timeout 和关机 timeout
 
 **GRUB:**
 
@@ -137,7 +165,27 @@ Next run:
 sudo update-grub
 ```
 
-**关机timeout:**
+**GRUB 菜单超时:**
+
+```shell
+sudo nano /etc/default/grub
+```
+
+修改 **`GRUB_TIMEOUT`** 的值
+
+有时这不起作用，则添加一行：
+
+```bash
+GRUB_RECORDFAIL_TIMEOUT=3
+```
+
+然后执行：
+
+```shell
+sudo update-grub
+```
+
+**关机 timeout:**
 
 ```shell
 sudo nano /etc/systemd/system.conf
@@ -177,7 +225,7 @@ sudo update-initramfs -u
 
 ## 禁用鼠标键盘唤醒
 
-配置文件位于：<https://github.com/MirTITH/MirTITH.github.io/tree/main/content/content/docs/Linux/ubuntu-安装/config_files>
+配置文件位于：<https://github.com/MirTITH/MirTITH.github.io/tree/main/content/content/docs/Linux/ubuntu-安装指南/config_files>
 
 ### 对于G304鼠标：
 
@@ -309,7 +357,7 @@ PRUNEFS="NFS afs autofs binfmt_misc ceph cgroup cgroup2 cifs coda configfs curlf
       sudo blkid | grep swap
       ```
 
-   3. 编辑 /etc/default/grub，向 `GRUB_CMDLINE_LINUX_DEFAULT` 添加 resume=xxx，例如：
+  3. 编辑 `/etc/default/grub`，向 `GRUB_CMDLINE_LINUX_DEFAULT` 添加 `resume=xxx`，例如：
 
       ```
       GRUB_CMDLINE_LINUX_DEFAULT="quiet splash resume=UUID=xxxx-xxxx-xxxx"
@@ -353,7 +401,7 @@ PRUNEFS="NFS afs autofs binfmt_misc ceph cgroup cgroup2 cifs coda configfs curlf
 官网：<https://v2raya.org>  
 Ubuntu安装方法：<https://v2raya.org/docs/prologue/installation/debian/>  
 安装完成后访问：<http://localhost:2017>
-
+**访问官网获取更多信息**
 ## 字体安装方法
 
 KDE 直接右键批量安装
@@ -390,19 +438,19 @@ git config --global core.quotepath false
 
 ## Zsh
 
-Install Zsh:
+安装 Zsh:
 
 ```shell
 sudo apt install zsh
 ```
 
-Make it your default shell:
+将其设置为默认 shell:
 
 ```shell
 chsh -s $(which zsh)
 ```
 
-Log out and log back in again to use your new default shell.
+注销并重新登录以使用新的默认 shell。
 
 如果需要临时切换到bash: 
 
@@ -416,15 +464,15 @@ exec bash
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-### Theme: powerlevel10k
+### 主题：powerlevel10k
 
-1. Clone the repository:
+1. 克隆仓库:
 
 ```shell
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 ```
 
-2. Set ZSH_THEME="powerlevel10k/powerlevel10k" in ~/.zshrc.
+2. 在 `~/.zshrc` 中设置 `ZSH_THEME="powerlevel10k/powerlevel10k"`.
 
 ### 插件
 
@@ -434,9 +482,9 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/conda-incubator/conda-zsh-completion ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/conda-zsh-completion
 ```
 
-Edit ~/.zshrc:
+编辑 `~/.zshrc`:
 
-```
+```shell
 plugins=(
     git
     z
@@ -513,15 +561,15 @@ sudo apt install "language-pack-kde-zh-han*"
 
 **如果遇到`GPG error "NO_PUBKEY"`：**
 
-Execute the following commands in terminal
+在终端执行以下命令：
 
 ```shell
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <PUBKEY>
 ```
 
-where `<PUBKEY>` is your missing public key for repository, e.g. `8BAF9A6F`.
+其中 `<PUBKEY>` 是缺失的仓库公钥，例如 `8BAF9A6F`。
 
-Then update   
+然后更新：
 
 ```shell
 sudo apt-get update
@@ -610,19 +658,19 @@ Preference:
 ![image-20231126175034696](assets/image-20231126175034696.png)
 
 
-# Bugs
+# 常见问题
 
-## KDE Dolpnin 无法访问 Windows 共享文件夹
+## KDE Dolphin 无法访问 Windows 共享文件夹
 
 报错：The file or folder smb://ip does not exist.
 
-A user on Reddit found a fix: In System Settings–>Network Settings–>Windows Shares, add ANY text to the user and password fields and restart Dolphin. Now I get a password prompt and can view and mount shares.
+Reddit 用户找到了解决方法：在系统设置 -> 网络设置 -> Windows 共享中，在用户和密码字段中填入任意文本，然后重启 Dolphin。现在会弹出密码提示，可以查看和挂载共享文件夹。
 
 > <https://forum.manjaro.org/t/dolphin-the-file-or-folder-smb-sharename-does-not-exist/114900/10>
 
 ## update-grub 不会找到其他 btrfs 分区中的 linux
 
-The GRUB os-prober has problems detecting btrfs @subvolumes, the easiest answer from "rick3332" from ubuntu-forums made it work for me on both dual-boot btrfs based OS installs(ubuntu16&18) each with their own grub. There is no need for comprehensive hack os-prober code or do non-persistent manual grub.cfg edits. Just create symlinks in each btrfs volume roots for @/boot and @/etc and run "sudo update-grub2" afterwards in each OS.
+> GRUB 的 os-prober 在检测 btrfs 子卷时存在问题，来自 ubuntu-forums 的"rick3332"提供了一个最简单的解决方案，在我的双 btrfs 系统（ubuntu 16 和 18）上都有效。不需要复杂的 os-prober 代码修改或持久性的 grub.cfg 编辑。只需在每个 btrfs 卷的根目录中创建到@/boot 和@/etc 的符号链接，然后在每个系统中运行"sudo update-grub2"。
 
 ```shell
 #navigate to root of your current booted brtfs based OS
