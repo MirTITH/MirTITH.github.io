@@ -75,9 +75,19 @@ kate cachyos-mirrorlist cachyos-v3-mirrorlist cachyos-v4-mirrorlist mirrorlist
 sudo pacman -Syy
 ```
 
-然后启动安装程序。安装时最好选择英文语言，使得家目录文件夹命名为英文。
+### 3. 启动安装程序
+
+启动安装程序。安装时最好选择英文语言，使得家目录文件夹命名为英文。
 
 ## 安装后配置
+
+### 删除 `cachyos-rate-mirrors` 包
+
+这个包会自动测速并更新镜像列表，但常常选择到很慢的镜像，不如删除它，然后手动配置镜像列表（见[换源](#2-换源)）。
+
+```bash
+sudo pacman -Rns cachyos-rate-mirrors
+```
 
 ### 启用 archlinuxcn
 
@@ -121,7 +131,7 @@ paru -S sparkle
 
 ```bash
 paru -S --needed vi
-sudo visudo
+sudo visudo /etc/sudoers.d/05_proxy
 ```
 
 添加（优先尝试这一行）：
@@ -139,8 +149,45 @@ Defaults env_keep += "http_proxy https_proxy ftp_proxy all_proxy no_proxy HTTP_P
 ### 字体与常用软件
 
 ```bash
-paru -S --needed ttf-lxgw-wenkai ttf-lxgw-wenkai-mono adobe-source-han-sans-otc-fonts noto-fonts-cjk typora visual-studio-code-bin moonlight-qt mission-center
+paru -S --needed ttf-lxgw-wenkai ttf-lxgw-wenkai-mono noto-fonts-cjk typora visual-studio-code-bin moonlight-qt mission-center firefox-i18n-zh-cn
 ```
+
+### 解决部分软件显示为日文字形问题
+
+创建文件 `~/.config/fontconfig/conf.d/64-language-selector-prefer.conf`：
+
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+  <alias>
+    <family>sans-serif</family>
+    <prefer>
+      <family>Noto Sans CJK SC</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>serif</family>
+    <prefer>
+      <family>Noto Serif CJK SC</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>monospace</family>
+    <prefer>
+      <family>Noto Sans Mono CJK SC</family>
+    </prefer>
+  </alias>
+</fontconfig>
+```
+
+然后刷新字体缓存：
+
+```bash
+fc-cache -fv
+```
+
+> 来自 Claude
 
 ### 输入法（Wayland + Fcitx5）
 
@@ -228,7 +275,9 @@ paru -S --needed python-pyqt5-webengine feeluown-full
 ### KDE 设置建议
 
 - 鼠标：禁用指针加速度
-- 键盘：NumLock 在开机时的状态：打开
+- 键盘：
+  - 键盘：NumLock 在开机时的状态：打开
+  - 快捷键->窗口管理->切换到下一桌面（不是切换到*下方*桌面）：添加 `Meta+Tab` 快捷键
 - 显示和监视器→屏幕边缘：左上角改为无操作
 - 颜色和主题
   - 全局主题：Breeze 微风阴阳
@@ -240,6 +289,7 @@ paru -S --needed python-pyqt5-webengine feeluown-full
     - 虚拟桌面：增加行数，添加一个桌面，勾选循环切换。
 - 登录屏幕：勾选自动登录，点击应用 Plasma 设置（可配合 KDE 启动时立刻锁定）
 - 电源管理：空闲时无操作，关闭屏幕 30 分钟，锁屏延迟约 20 秒。
+- 会话→桌面会话：登陆自动启动应用程序：启动为空会话
 
 **配置 KDE 启动时立刻锁定（配合自动登陆）**
 
@@ -270,3 +320,38 @@ xdg-user-dirs-update --force
 ```bash
 kate ~/.local/share/user-places.xbel
 ```
+
+### 设置 zsh
+
+设置 zsh 为默认 shell：
+
+```bash
+chsh -s /bin/zsh
+```
+
+打开 `/usr/share/cachyos-zsh-config/cachyos-config.zsh`，进行下面的操作：
+- 注释掉 `ENABLE_CORRECTION="true"`
+- 添加 z （快速目录切换工具）插件：
+  找到下面这行：
+  ```bash
+  [[ -z "${plugins[*]}" ]] && plugins=(git fzf extract)
+  ```
+  修改为：
+  ```bash
+  [[ -z "${plugins[*]}" ]] && plugins=(git fzf extract z)
+  ```
+
+### 卸载 Plymouth
+
+Plymouth 用来在系统开机时显示动画，但它有时会导致开机卡住。如果你不需要开机动画，可以卸载它：
+
+1. 编辑 `/etc/mkinitcpio.conf`，找到 `HOOKS` 行，删除其中的 `plymouth`，然后执行：
+  ```
+  sudo mkinitcpio -P
+  ```
+  以重新生成 initramfs。
+2. （用于显示开机日志，可选）编辑 `/etc/default/grub`，找到 `GRUB_CMDLINE_LINUX_DEFAULT` 行，删除其中的 `quiet splash`
+3. 卸载 Plymouth：
+  ```bash
+  sudo pacman -Rnsc plymouth
+  ```
