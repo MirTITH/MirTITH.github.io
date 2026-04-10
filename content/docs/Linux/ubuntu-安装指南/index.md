@@ -8,8 +8,6 @@ type: docs
 > **适用场景**：Windows 和 Ubuntu 双系统时，Ubuntu 的 EFI 引导被安装到了 Windows 磁盘上。这会导致 Ubuntu 依赖 Windows 硬盘才能启动。  
 > 难绷的是，由于某些版本 Ubuntu 安装程序的 bug，在安装时无论怎么选，Ubuntu 的 EFI 引导都会被安装到 Windows 磁盘上。
 
-### 操作步骤
-
 1. **检查 EFI 分区**  
    确认 Ubuntu 磁盘上是否存在 EFI 分区，如果没有就创建一个
 
@@ -47,47 +45,7 @@ type: docs
 
 ## 换源
 
-### APT
-
-> 校内源：<https://mirrors-help.osa.moe/ubuntu/>  
-> 中科大：<https://mirrors.ustc.edu.cn/help/ubuntu.html>
-
-### （可选，建议）让 `sudo` 继承代理变量
-
-> 这样在执行 `sudo pacman -Syu`、`sudo apt update` 等命令时也会遵守代理环境变量中的设置。
-
-```bash
-paru -S --needed vi
-sudo visudo
-```
-
-添加（优先尝试这一行）：
-
-```text
-Defaults env_keep += "*_proxy *_PROXY"
-```
-
-若系统提示语法不支持，则改用：
-
-```text
-Defaults env_keep += "http_proxy https_proxy ftp_proxy all_proxy no_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY NO_PROXY"
-```
-
-#### Pip
-
-```
-# HITsz(内网最快)
-pip config set global.index-url https://mirrors.osa.moe/pypi/web/simple
-# 清华源
-pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-# 阿里源
-pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
-# 腾讯源(最快)
-pip config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple
-
-# 换回默认源
-pip config unset global.index-url
-```
+见 [网络/换源](/docs/网络/换源)
 
 ## DNS
 
@@ -97,14 +55,6 @@ pip config unset global.index-url
 | ---------- | ------------------------- |
 | 国内推荐   | `119.29.29.29, 1.2.4.8`   |
 | 国内 IPv6  | `2402:4e00::, 240c::6666` |
-
-## 与 Windows 时间同步
-
-> 以下是修改 linux 端的方法，但更建议修改 Windows 端与 Ubuntu 时间同步。
-
-```bash
-timedatectl set-local-rtc 1 --adjust-system-clock
-```
 
 ## GRUB 超时设置
 
@@ -303,6 +253,27 @@ EOF
 - 官网：<https://v2raya.org>
 - 安装方法：<https://v2raya.org/docs/prologue/installation/debian/>
 - 安装完成后访问：<http://localhost:2017>
+
+### （可选，建议）让 `sudo` 继承代理变量
+
+> 这样在执行 `sudo pacman -Syu`、`sudo apt update` 等命令时也会遵守代理环境变量中的设置。
+
+```bash
+paru -S --needed vi
+sudo visudo
+```
+
+添加（优先尝试这一行）：
+
+```text
+Defaults env_keep += "*_proxy *_PROXY"
+```
+
+若系统提示语法不支持，则改用：
+
+```text
+Defaults env_keep += "http_proxy https_proxy ftp_proxy all_proxy no_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY NO_PROXY"
+```
 
 ## 字体安装
 

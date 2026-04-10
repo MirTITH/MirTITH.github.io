@@ -66,19 +66,7 @@ bash Miniforge3-$(uname)-$(uname -m).sh
 conda config --set auto_activate false
 ```
 
-**换源**
-
-编辑 `~/.condarc`，添加以下内容：
-
-```yaml
-channels:
-  - conda-forge
-mirrored_channels:
-  conda-forge:
-    - https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge
-```
-
-运行 `conda clean -i` 清除索引缓存，保证用的是镜像站提供的索引。
+[Conda 换源](/docs/网络/换源/#conda)
 
 ### Miniconda
 

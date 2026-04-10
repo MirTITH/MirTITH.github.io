@@ -33,47 +33,7 @@ sudo chattr +i /etc/calamares/scripts/update-mirrorlist
 
 ### 2. 换源
 
-打开文件：
-
-```bash
-cd /etc/pacman.d
-kate cachyos-mirrorlist cachyos-v3-mirrorlist cachyos-v4-mirrorlist mirrorlist
-```
-
-在以下文件最顶端添加：
-
-- `/etc/pacman.d/cachyos-mirrorlist`
-
-    ```ini
-    Server = https://mirrors.ustc.edu.cn/cachyos/repo/$arch/$repo
-    ```
-
-- `/etc/pacman.d/cachyos-v3-mirrorlist`
-
-    ```ini
-    Server = https://mirrors.ustc.edu.cn/cachyos/repo/$arch_v3/$repo
-    ```
-
-- `/etc/pacman.d/cachyos-v4-mirrorlist`
-
-    ```ini
-    Server = https://mirrors.ustc.edu.cn/cachyos/repo/$arch_v4/$repo
-    ```
-
-- `/etc/pacman.d/mirrorlist`
-
-    ```ini
-    # 校内源
-    # Server = https://mirrors.osa.moe/archlinux/$repo/os/$arch
-    # 中科大源
-    Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
-    ```
-
-最后更新镜像：
-
-```bash
-sudo pacman -Syy
-```
+见 [换源#CachyOS pacman](/docs/网络/换源/#cachyos-pacman)
 
 ### 3. 启动安装程序
 
@@ -83,7 +43,7 @@ sudo pacman -Syy
 
 ### 删除 `cachyos-rate-mirrors` 包
 
-这个包会自动测速并更新镜像列表，但常常选择到很慢的镜像，不如删除它，然后手动配置镜像列表（见[换源](#2-换源)）。
+这个包会自动测速并更新镜像列表，但常常选择到很慢的镜像，不如删除它，然后 [手动配置镜像列表](/docs/网络/换源/#cachyos-pacman)。
 
 ```bash
 sudo pacman -Rns cachyos-rate-mirrors
