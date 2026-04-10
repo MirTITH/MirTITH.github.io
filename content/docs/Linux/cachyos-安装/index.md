@@ -101,7 +101,7 @@ sudo pacman -Sy archlinuxcn-keyring
 
 编辑 `/etc/paru.conf`，取消 `BottomUp` 和 `SudoLoop` 的注释。
 
-### 基础配置
+### Git 配置
 
 ```bash
 git config --global user.name "<your-name>"
@@ -109,7 +109,15 @@ git config --global user.email "<your-email>"
 git config --global core.quotepath false
 ```
 
-让 `sudo` 继承代理变量，使得在使用 `sudo` 执行命令时也能使用代理：
+### 代理软件 
+
+```bash
+paru -S sparkle
+```
+
+#### （可选，建议）让 `sudo` 继承代理变量
+
+> 这样在执行 `sudo pacman -Syu`、`sudo apt update` 等命令时也会遵守代理环境变量中的设置。
 
 ```bash
 paru -S --needed vi
@@ -126,12 +134,6 @@ Defaults env_keep += "*_proxy *_PROXY"
 
 ```text
 Defaults env_keep += "http_proxy https_proxy ftp_proxy all_proxy no_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY NO_PROXY"
-```
-
-### 代理软件 
-
-```bash
-paru -S sparkle
 ```
 
 ### 字体与常用软件
