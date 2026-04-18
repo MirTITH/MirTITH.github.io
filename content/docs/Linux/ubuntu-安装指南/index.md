@@ -91,6 +91,7 @@ zram 可以压缩内存中不活跃的数据，提供更大的可用内存空间
 
 3. **启动/重启服务**
    ```bash
+   sudo systemctl daemon-reload
    sudo systemctl restart zramswap
    sudo systemctl enable zramswap
    ```
