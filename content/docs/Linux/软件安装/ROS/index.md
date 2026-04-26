@@ -77,6 +77,51 @@ ros2 run demo_nodes_py listener
 > - 输入 `rs` 即可先 source 系统 ros2，再 source 当前目录下的 ros2 工作空间
 > 该脚本还会自动配置 `ros2`, `colcon`, `colcon_cd` 等命令的自动补全，并支持设置 `ROS_DOMAIN_ID` 环境变量。
 
+## VS Code 调试
+
+> 建议先安装 VS Code 的 ROS 和 C/C++ 扩展，并确保系统已安装 `colcon mixin`。
+
+1. 使用 debug 配置编译工作空间：
+
+   ```shell
+   colcon build --symlink-install --mixin debug compile-commands
+   ```
+
+2. 正常运行需要调试的节点。
+3. 在 VS Code 的“运行和调试”中创建 `ROS: Attach` 配置。
+4. 启动调试，并选择对应的进程。
+5. 如果系统要求，允许调试器使用管理员权限附加进程。
+
+如果不想每次都输入密码，可以临时放宽 `ptrace` 限制：
+
+```shell
+sudo sysctl -w kernel.yama.ptrace_scope=0
+```
+
+永久修改可以编辑 `/etc/sysctl.d/10-ptrace.conf`，将 `kernel.yama.ptrace_scope = 1` 改为 `0`，然后重启系统。
+
+## launch.py 技巧
+
+### 解决终端不打印日志
+
+在 `Node` 中增加 `emulate_tty=True`，并将 `output` 设置为 `screen` 或 `both`：
+
+```python
+Node(
+	package=kThisPackageName,
+	executable="exe_name",
+	output="screen",
+	emulate_tty=True,
+	parameters=[
+		{
+			# "robot_description": robot_description_content,
+		}
+	],
+)
+```
+
+> 参考：<https://github.com/ros2/launch/issues/188#issuecomment-465048178>
+
 ## 常见问题
 
 ### 构建 ros2 python 包时报 EasyInstallDeprecationWarning

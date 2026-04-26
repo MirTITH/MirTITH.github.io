@@ -56,6 +56,20 @@ type: docs
 | 国内推荐   | `119.29.29.29, 1.2.4.8`   |
 | 国内 IPv6  | `2402:4e00::, 240c::6666` |
 
+## 与 Windows 时间兼容
+
+Windows 默认把硬件时钟（RTC）当作本地时间处理。如果你和默认配置的 Windows 双系统，出现两个系统来回切换后时间错乱，可以让 Linux 也按本地时间解释 RTC：
+
+```bash
+timedatectl set-local-rtc 1 --adjust-system-clock
+```
+
+如果以后改为让 Windows 使用 UTC，再执行下面的命令切回 Linux 默认行为：
+
+```bash
+timedatectl set-local-rtc 0 --adjust-system-clock
+```
+
 ## （可选）配置 zram
 
 zram 可以压缩内存中不活跃的数据，提供更大的可用内存空间。Ubuntu 主要有两种实现方式：
@@ -476,7 +490,7 @@ sudo apt-get update
 
 ## Samba
 
-[samba使用教程.md](../samba/samba使用教程.md)
+[Samba](/docs/网络/samba/)
 
 ## 其他软件
 
