@@ -33,53 +33,21 @@ sudo chattr +i /etc/calamares/scripts/update-mirrorlist
 
 ### 2. 换源
 
-打开文件：
-
-```bash
-cd /etc/pacman.d
-kate cachyos-mirrorlist cachyos-v3-mirrorlist cachyos-v4-mirrorlist mirrorlist
-```
-
-在以下文件最顶端添加：
-
-- `/etc/pacman.d/cachyos-mirrorlist`
-
-    ```ini
-    Server = https://mirrors.ustc.edu.cn/cachyos/repo/$arch/$repo
-    ```
-
-- `/etc/pacman.d/cachyos-v3-mirrorlist`
-
-    ```ini
-    Server = https://mirrors.ustc.edu.cn/cachyos/repo/$arch_v3/$repo
-    ```
-
-- `/etc/pacman.d/cachyos-v4-mirrorlist`
-
-    ```ini
-    Server = https://mirrors.ustc.edu.cn/cachyos/repo/$arch_v4/$repo
-    ```
-
-- `/etc/pacman.d/mirrorlist`
-
-    ```ini
-    # 校内源
-    # Server = https://mirrors.osa.moe/archlinux/$repo/os/$arch
-    # 中科大源
-    Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
-    ```
-
-最后更新镜像：
-
-```bash
-sudo pacman -Syy
-```
+见 [换源#CachyOS pacman](/docs/网络/换源/#cachyos-pacman)
 
 ### 3. 启动安装程序
 
 启动安装程序。安装时最好选择英文语言，使得家目录文件夹命名为英文。
 
 ## 安装后配置
+
+### 删除 `cachyos-rate-mirrors` 包
+
+这个包会自动测速并更新镜像列表，但常常选择到很慢的镜像，不如删除它，然后 [手动配置镜像列表](/docs/网络/换源/#cachyos-pacman)。
+
+```bash
+sudo pacman -Rns cachyos-rate-mirrors
+```
 
 ### 启用 archlinuxcn
 
@@ -103,7 +71,7 @@ sudo pacman -Sy archlinuxcn-keyring
 
 编辑 `/etc/paru.conf`，取消 `BottomUp` 和 `SudoLoop` 的注释。
 
-### 基础配置
+### Git 配置
 
 ```bash
 git config --global user.name "<your-name>"
@@ -111,7 +79,15 @@ git config --global user.email "<your-email>"
 git config --global core.quotepath false
 ```
 
-让 `sudo` 继承代理变量，使得在使用 `sudo` 执行命令时也能使用代理：
+### 代理软件 
+
+```bash
+paru -S sparkle
+```
+
+#### （可选，建议）让 `sudo` 继承代理变量
+
+> 这样在执行 `sudo pacman -Syu`、`sudo apt update` 等命令时也会遵守代理环境变量中的设置。
 
 ```bash
 paru -S --needed vi
@@ -128,12 +104,6 @@ Defaults env_keep += "*_proxy *_PROXY"
 
 ```text
 Defaults env_keep += "http_proxy https_proxy ftp_proxy all_proxy no_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY NO_PROXY"
-```
-
-### 代理软件 
-
-```bash
-paru -S sparkle
 ```
 
 ### 字体与常用软件
@@ -329,4 +299,19 @@ chsh -s /bin/zsh
   修改为：
   ```bash
   [[ -z "${plugins[*]}" ]] && plugins=(git fzf extract z)
+  ```
+
+### 卸载 Plymouth
+
+Plymouth 用来在系统开机时显示动画，但它有时会导致开机卡住。如果你不需要开机动画，可以卸载它：
+
+1. 编辑 `/etc/mkinitcpio.conf`，找到 `HOOKS` 行，删除其中的 `plymouth`，然后执行：
+  ```
+  sudo mkinitcpio -P
+  ```
+  以重新生成 initramfs。
+2. （用于显示开机日志，可选）编辑 `/etc/default/grub`，找到 `GRUB_CMDLINE_LINUX_DEFAULT` 行，删除其中的 `quiet splash`
+3. 卸载 Plymouth：
+  ```bash
+  sudo pacman -Rnsc plymouth
   ```
