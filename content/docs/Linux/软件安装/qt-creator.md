@@ -9,6 +9,6 @@ type: docs
 
 如果要换源：
 
-```shell
+```bash
 ./qt-online-installer-linux-x64-4.10.0.run --mirror https://mirrors.ustc.edu.cn/qtproject
 ```

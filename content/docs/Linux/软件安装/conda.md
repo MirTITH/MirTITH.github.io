@@ -90,7 +90,7 @@ rm -rf ~/miniconda3/miniconda.sh
 
 取消默认进入 base 环境：
 
-```shell
+```bash
 conda config --set auto_activate false
 ```
 

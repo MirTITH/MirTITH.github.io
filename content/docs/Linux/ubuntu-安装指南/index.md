@@ -472,7 +472,7 @@ sudo apt purge fcitx-ui-qimpanel
 
 在终端执行以下命令：
 
-```shell
+```bash
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <PUBKEY>
 ```
 
@@ -480,7 +480,7 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <PUBKEY>
 
 然后更新：
 
-```shell
+```bash
 sudo apt-get update
 ```
 

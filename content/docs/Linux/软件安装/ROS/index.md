@@ -21,7 +21,7 @@ type: docs
 
 #### Humble for Ubuntu 22.04
 
-```shell
+```bash
 sudo apt install software-properties-common
 sudo add-apt-repository universe
 sudo apt update && sudo apt install curl -y
@@ -83,7 +83,7 @@ ros2 run demo_nodes_py listener
 
 1. 使用 debug 配置编译工作空间：
 
-   ```shell
+   ```bash
    colcon build --symlink-install --mixin debug compile-commands
    ```
 
@@ -94,7 +94,7 @@ ros2 run demo_nodes_py listener
 
 如果不想每次都输入密码，可以临时放宽 `ptrace` 限制：
 
-```shell
+```bash
 sudo sysctl -w kernel.yama.ptrace_scope=0
 ```
 
@@ -130,7 +130,7 @@ Node(
 
 但目前 ros2 humble 并没有很好的替代方案，所以为了不报 warning, 只能降级安装工具 setuptools. 
 
-```shell
+```bash
 # 降级到最后一个不会报 warning 的版本
 pip install setuptools==58.2.0
 ```

@@ -5,7 +5,7 @@ type: docs
 
 ## 卸载旧版 Fcitx（可选）
 
-```shell
+```bash
 sudo apt purge *fcitx*
 ```
 
@@ -13,14 +13,14 @@ sudo apt purge *fcitx*
 
 ### Ubuntu 22.04
 
-```shell
+```bash
 sudo apt update
 sudo apt install fcitx5 'fcitx5-frontend*' fcitx5-chinese-addons fcitx5-material-color fcitx5-module-cloudpinyin kde-config-fcitx5
 ```
 
 ### Ubuntu 20.04
 
-```shell
+```bash
 sudo apt update
 sudo apt install fcitx5 'fcitx5-frontend*' fcitx5-chinese-addons
 ```

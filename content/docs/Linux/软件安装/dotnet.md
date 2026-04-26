@@ -7,7 +7,7 @@ type: docs
 
 ### ubuntu 20.04
 
-```shell
+```bash
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
@@ -17,6 +17,6 @@ sudo apt install dotnet-runtime-6.0
 
 ### ubuntu 22.04
 
-```shell
+```bash
 sudo apt install dotnet-runtime-6.0
 ```

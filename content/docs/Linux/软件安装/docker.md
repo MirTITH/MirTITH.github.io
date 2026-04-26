@@ -85,7 +85,7 @@ sudo rmdir /mnt/root
 
 1. 安装 docker
 
-   ```shell
+   ```bash
    curl -fsSL https://get.docker.com -o get-docker.sh
    sudo sh get-docker.sh
    ```
@@ -94,7 +94,7 @@ sudo rmdir /mnt/root
 
 3. 使 docker 命令不需要 root 运行
 
-   ```shell
+   ```bash
    sudo groupadd docker
    sudo usermod -aG docker $USER
    ```
@@ -103,7 +103,7 @@ sudo rmdir /mnt/root
 
 5. Test your docker installation
 
-   ```shell
+   ```bash
    docker run hello-world
    ```
 
@@ -117,31 +117,31 @@ sudo rmdir /mnt/root
 ### For Arch Linux
 
 1. 安装
-   ```shell
+   ```bash
    paru -S docker docker-buildx
    ```
 
 2. （可选）[修改配置以使用传统的 overlay2 存储驱动](#修改配置以使用传统的-overlay2-存储驱动)
 
 3. 启动和开机自启
-   ```shell
+   ```bash
    sudo systemctl enable --now docker.service
    ```
 
 4. 检查
-   ```shell
+   ```bash
    sudo docker version
    sudo docker info
    ```
 
 5. 使得运行 docker 命令不需要 root 权限，重启生效
-   ```shell
+   ```bash
    sudo usermod -aG docker $USER
    reboot
    ```
 
 6. （可选）安装 NVIDIA Container Toolkit，使 docker 能够使用 NVIDIA GPU
-   ```shell
+   ```bash
    # 安装
    sudo pacman -S nvidia-container-toolkit
 
@@ -207,7 +207,7 @@ sudo docker info | grep 'Storage Driver'
 
 ### docker 运行 GUI 程序
 
-```shell
+```bash
 # Manjaro/Arch Linux 需要安装 xorg-xhost
 # （Ubuntu 自带 xhost，不需要安装）
 sudo pacman -S xorg-xhost

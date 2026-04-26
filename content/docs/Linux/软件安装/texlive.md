@@ -3,7 +3,7 @@ title: TexLive
 type: docs
 ---
 
-```shell
+```bash
 # For Arch Linux：
 paru -S texlive-meta texlive-langcjk texlive-langchinese biber
 ```

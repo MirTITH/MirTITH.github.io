@@ -7,7 +7,7 @@ type: docs
 
 将 [conf.user.json](conf.user.json) 复制到 `~/.config/Typora/conf/`：
 
-```shell
+```bash
 mkdir -p ~/.config/Typora/conf/
 cp conf.user.json ~/.config/Typora/conf/
 ```

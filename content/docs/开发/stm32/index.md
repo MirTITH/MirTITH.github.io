@@ -37,7 +37,7 @@ type: docs
 
 2. 解压到 `~/.local/xPacks/arm-none-eabi-gcc`：
 
-   ```shell
+   ```bash
    mkdir -p ~/.local/xPacks/arm-none-eabi-gcc
    cd ~/.local/xPacks/arm-none-eabi-gcc
    tar xvf <下载的安装包路径>
@@ -51,7 +51,7 @@ type: docs
 
 3. 如有需要，可把工具链链接到 `~/.local/bin`：
 
-   ```shell
+   ```bash
    ln -s <解压后的文件夹绝对路径>/bin/* ~/.local/bin
    ```
 
