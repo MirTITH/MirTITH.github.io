@@ -5,23 +5,16 @@ type: docs
 
 ## 软件安装和基本配置
 
-### Manjaro / Arch Linux
+### CachyOS
 
 参考：<https://wiki.archlinux.org/title/Samba>
 
 ```bash
 # 安装
-sudo pacman -S samba
+paru -S samba cachyos-samba-settings
 
-# 添加用户（会要求输入 Samba 共享密码）
-sudo smbpasswd -a $USER
-
-# Enable usershares，之后可以直接在 Dolphin 中右键共享文件夹
-sudo mkdir /var/lib/samba/usershares
-sudo groupadd -r sambashare
-sudo chown root:sambashare /var/lib/samba/usershares
-sudo chmod 1770 /var/lib/samba/usershares
-sudo gpasswd sambashare -a $USER
+# 安装 KDE 插件（可选）
+paru -S kdenetwork-filesharing
 
 # 启动并设置开机自启
 sudo systemctl enable --now smb
@@ -29,6 +22,8 @@ sudo systemctl enable --now smb
 # （可选）通过 NetBIOS 主机名访问
 sudo systemctl enable --now nmb
 ```
+
+重启电脑后，能够在 KDE 等文件管理器进行分享。
 
 ### Ubuntu
 
