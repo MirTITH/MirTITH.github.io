@@ -19,11 +19,6 @@ layout: hextra-home
 {{< /hextra/hero-subtitle >}}
 </div>
 
-<div class="hx-mb-6">
-{{< hextra/hero-button text="了解更多 →" link="about" >}}
-{{< hextra/hero-button text="GitHub ↗" link="https://github.com/MirTITH" >}}
-</div>
-
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
     title="关于我"
