@@ -5,3 +5,8 @@ resources/
 
 # Editor
 .vscode/
+
+# 占位媒体（本地预览，不入库）
+temp/
+static/videos/
+static/images/proj/
