@@ -18,7 +18,7 @@
 | 布局 | 多列响应式网格（桌面 2–3 列，小屏单列） |
 | 卡片媒体 | 视频用浏览器原生 `<video controls>`，默认**暂停在第一帧**，点击原生控件播放；竞赛用图片 |
 | 视频来源 | 本地 mp4 |
-| 视频处理 | ffmpeg 压缩到 720p、单个 <5MB；图片压缩到 ~800px |
+| 视频处理 | 统一降到 720p、编码 H.264（libx264）+ AAC + faststart、单个 <5MB；图片压缩到 ~800px |
 | 素材入库 | **不入库**：`static/videos/`、`static/images/proj/`、`temp/` 加入 `.gitignore`（占位素材仅本地预览） |
 | 降级 | 媒体缺失时卡片仍正常渲染（标题+描述，媒体区空），不报错、不裂图 |
 | 条目 | 科研 2 + 竞赛 3，共 5 张卡片 |
@@ -49,10 +49,14 @@
 
 ### 2. 素材处理（本地，不入库）
 
+**源视频参数**（ffprobe 实测）：两个均为 1920×1080 / 30fps；`4倍速长序列操作.mp4` 36.8s、H.264、6.6 Mbps；`VID_20260121_200147.mp4` 18.7s、**H.265**、13.2 Mbps。
+
+**视频转码策略**：统一降到 **720p**（`-vf scale=-2:720`）、编码统一为 **H.264（libx264）+ AAC**、加 `-movflags +faststart`（边下边播）。`VID_20260121` 当前为 H.265，多数浏览器网页端不支持，必须转 H.264。目标单个 <5MB，用 CRF + maxrate 控制体积（实现时按时长选 CRF，过大则提高 CRF 或降码率重试）。不选 H.265/VP9/AV1：H.264 是网页视频兼容性最稳的格式。
+
 | 卡片 | 源（temp/） | 目标 | 处理 |
 |---|---|---|---|
-| 具身智能双臂移动机器人 | `4倍速长序列操作.mp4` | `static/videos/dual-arm.mp4` | ffmpeg 720p，<5MB |
-| 复杂环境机械臂自主避障与抓取 | `VID_20260121_200147.mp4` | `static/videos/grasping.mp4` | ffmpeg 720p，<5MB |
+| 具身智能双臂移动机器人 | `4倍速长序列操作.mp4` | `static/videos/dual-arm.mp4` | 720p H.264，<5MB |
+| 复杂环境机械臂自主避障与抓取 | `VID_20260121_200147.mp4` | `static/videos/grasping.mp4` | 720p H.264（H.265→H.264），<5MB |
 | 全国大学生智能车竞赛 | `ACG.GY_17.jpg` | `static/images/proj/smartcar.jpg` | 压缩到 ~800px |
 | ROBOCON | `ACG.GY_18.jpg` | `static/images/proj/robocon.jpg` | 压缩到 ~800px |
 | 深圳灵巧手大赛 | `ACG.GY_24.jpg` | `static/images/proj/dexhand.jpg` | 压缩到 ~800px |
