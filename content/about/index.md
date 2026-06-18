@@ -26,16 +26,25 @@ toc: false
   - 基于 UMI 搭建手持夹爪数据采集系统，优化 ORB-SLAM3 工程实现。
   - 复现并优化 Diffusion Policy 模仿学习算法，完成机器人抓取任务验证。
 
-### 科研与项目
+### 项目与竞赛经历
 
-- **具身智能双臂移动机器人**（2024.07 – 至今）
-  搭建导师组具身智能科研平台，负责机械臂 / 灵巧手 ROS 2 驱动、运动控制与自主移动抓取算法。
-- **复杂环境下机械臂自主避障与自主抓取**（本科毕业设计）
-  独立完成驱动适配、手眼标定、运动学解算、避障规划与抓取位姿生成，实机平均抓取成功率超过 80%。
-
-### 竞赛
-
-- **全国大学生智能车竞赛** · 全国总决赛一等奖、RT-Thread 创新专项奖（2021）
+{{< media-cards >}}
+  {{< media-card title="具身智能双臂移动机器人" video="/videos/dual-arm.mp4" >}}
+导师组具身智能科研平台核心软硬件开发：机械臂 / 灵巧手 ROS 2 驱动、运动控制与自主移动抓取。
+  {{< /media-card >}}
+  {{< media-card title="复杂环境机械臂自主避障与抓取" tag="本科毕设" video="/videos/grasping.mp4" >}}
+独立完成手眼标定、运动学解算、避障规划与抓取位姿生成，实机平均抓取成功率超过 80%。
+  {{< /media-card >}}
+  {{< media-card title="全国大学生智能车竞赛" tag="国一" image="/images/proj/smartcar.jpg" >}}
+双车接力组别：基于 RT-Thread 的多线程实时系统 + 双环 PID 控制，全国总决赛一等奖。
+  {{< /media-card >}}
+  {{< media-card title="ROBOCON 全国大学生机器人大赛" tag="三等奖" image="/images/proj/robocon.jpg" >}}
+双机器人协作系统：底盘运动学解算、IMU 稳定与激光测距定位，实现全向移动与精准定位。
+  {{< /media-card >}}
+  {{< media-card title="深圳市智能机器人灵巧手大赛" tag="卓越精准操作奖" image="/images/proj/dexhand.jpg" >}}
+双臂移动机器人：结合滤波、自适应柔顺控制与 MPC，实现力接触安全遥操作与数据采集。
+  {{< /media-card >}}
+{{< /media-cards >}}
 
 ## 技能
 
