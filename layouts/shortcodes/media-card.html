@@ -1,0 +1,30 @@
+{{/* 单张项目/竞赛卡片：媒体（视频或图片，可降级）+ 标题 + 描述 */}}
+{{ $title := .Get "title" }}
+{{ $tag := .Get "tag" }}
+{{ $video := .Get "video" }}
+{{ $image := .Get "image" }}
+{{ $poster := .Get "poster" }}
+<div class="hextra-card hx:border hx:border-gray-200 hx:dark:border-neutral-800 hx:rounded-xl hx:overflow-hidden hx:bg-transparent">
+  {{ if $video }}
+  <div style="position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000;">
+    <video controls preload="metadata" playsinline{{ with $poster }} poster="{{ . }}"{{ end }}
+           style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+      <source src="{{ $video }}" type="video/mp4" />
+    </video>
+  </div>
+  {{ else if $image }}
+  <div style="width: 100%; aspect-ratio: 16 / 9; overflow: hidden;">
+    <img src="{{ $image }}" alt="{{ $title }}" loading="lazy"
+         style="width: 100%; height: 100%; object-fit: cover;" />
+  </div>
+  {{ end }}
+  <div class="hx:p-4">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;">
+      <span class="hx:font-semibold hx:text-gray-800 hx:dark:text-gray-100">{{ $title }}</span>
+      {{ with $tag }}<span class="hx:text-xs hx:rounded hx:px-2 hx:py-0.5 hx:bg-primary-100 hx:dark:bg-primary-900 hx:text-primary-700 hx:dark:text-primary-300 hx:whitespace-nowrap">{{ . }}</span>{{ end }}
+    </div>
+    <div class="hx:mt-2 hx:text-sm hx:text-gray-600 hx:dark:text-gray-400">
+      {{ .Inner | markdownify }}
+    </div>
+  </div>
+</div>
