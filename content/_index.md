@@ -3,23 +3,14 @@ title: 🐑
 layout: hextra-home
 ---
 
-<div class="hx-mt-6 hx-mb-6" style="text-align: center;">
-  <img src="/images/avatar.jpg" alt="谢阳" style="width: 160px; height: 160px; border-radius: 9999px; object-fit: cover; display: inline-block;" />
+<div style="width: 100%; text-align: center;" class="hx-mt-6">
+  <img src="/images/avatar.jpg" alt="谢阳"
+       style="width: 160px; height: 160px; border-radius: 9999px; object-fit: cover; display: inline-block;" />
+  <h1 style="margin-top: 1rem; font-size: 2.5rem; font-weight: 800; line-height: 1.2;">谢阳 / Yang Xie</h1>
+  <p style="margin-top: 0.5rem; font-size: 1.125rem; color: #6b7280;">机器人与具身智能方向硕士在读 · 哈工大（深圳）</p>
 </div>
 
-<div class="hx-mt-6 hx-mb-6">
-{{< hextra/hero-headline >}}
-  谢阳 / Yang Xie
-{{< /hextra/hero-headline >}}
-</div>
-
-<div class="hx-mb-12">
-{{< hextra/hero-subtitle >}}
-  机器人与具身智能方向硕士在读 · 哈工大（深圳）
-{{< /hextra/hero-subtitle >}}
-</div>
-
-{{< hextra/feature-grid >}}
+{{< hextra/feature-grid cols="3" >}}
   {{< hextra/feature-card
     title="关于我"
     subtitle="教育、实习、科研项目与技能"
