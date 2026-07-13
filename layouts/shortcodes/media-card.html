@@ -4,12 +4,25 @@
 {{ $video := .Get "video" }}
 {{ $image := .Get "image" }}
 {{ $poster := .Get "poster" }}
+{{ $videoTypes := dict
+  ".m4v" "video/x-m4v"
+  ".mov" "video/quicktime"
+  ".mp4" "video/mp4"
+  ".ogg" "video/ogg"
+  ".ogv" "video/ogg"
+  ".webm" "video/webm"
+}}
+{{ $videoType := "" }}
+{{ with $video }}
+  {{ $videoURL := urls.Parse . }}
+  {{ $videoType = default "" (index $videoTypes (lower (path.Ext $videoURL.Path))) }}
+{{ end }}
 <div class="hextra-card hx:border hx:border-gray-200 hx:dark:border-neutral-800 hx:rounded-xl hx:overflow-hidden hx:bg-transparent">
   {{ if $video }}
   <div style="position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000;">
-    <video controls preload="metadata" playsinline{{ with $poster }} poster="{{ . }}"{{ end }}
+    <video class="media-card-video" controls preload="metadata" playsinline{{ with $poster }} poster="{{ . }}"{{ end }}
            style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
-      <source src="{{ $video }}" type="video/mp4" />
+      <source src="{{ $video }}"{{ with $videoType }} type="{{ . }}"{{ end }} />
     </video>
   </div>
   {{ else if $image }}

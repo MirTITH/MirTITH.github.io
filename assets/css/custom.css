@@ -1,0 +1,6 @@
+/* 卡片内的视频裁剪以填满 16:9 区域，全屏时完整显示视频。 */
+.media-card-video:fullscreen,
+.media-card-video:-webkit-full-screen {
+  object-fit: contain !important;
+  background: #000;
+}
