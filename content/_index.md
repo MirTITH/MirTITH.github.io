@@ -19,14 +19,15 @@ layout: hextra-home
     subtitle="教育、实习、科研项目与技能"
     link="about"
   >}}
-  <!-- {{< hextra/feature-card
-    title="博客"
-    subtitle="技术笔记与随笔"
-    link="blog"
-  >}} -->
+
   {{< hextra/feature-card
     title="知识库"
     subtitle="开发、Linux、网络等文档"
     link="docs"
+  >}}
+   {{< hextra/feature-card
+    title="博客"
+    subtitle="技术笔记与随笔"
+    link="blog"
   >}}
 {{< /hextra/feature-grid >}}
