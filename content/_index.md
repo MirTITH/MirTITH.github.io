@@ -15,12 +15,6 @@ layout: hextra-home
 
 {{< hextra/feature-grid cols="3" >}}
   {{< hextra/feature-card
-    title="关于我"
-    subtitle="教育、实习、科研项目与技能"
-    link="about"
-  >}}
-
-  {{< hextra/feature-card
     title="知识库"
     subtitle="开发、Linux、网络等文档"
     link="docs"
@@ -29,5 +23,10 @@ layout: hextra-home
     title="博客"
     subtitle="技术笔记与随笔"
     link="blog"
+  >}}
+  {{< hextra/feature-card
+    title="关于我"
+    subtitle="教育、实习、科研项目与技能"
+    link="about"
   >}}
 {{< /hextra/feature-grid >}}

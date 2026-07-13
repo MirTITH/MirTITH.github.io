@@ -1,0 +1,20 @@
+{{- $title := .Get "title" -}}
+{{- $icon := .Get "icon" -}}
+{{- $kind := .Get "kind" -}}
+<section class="about-panel{{ with $kind }} about-panel--{{ . }}{{ end }}">
+  <h2 class="about-panel-title">
+    <span class="about-panel-icon" aria-hidden="true">
+      {{- if eq $icon "user" -}}
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" /><path d="M4.5 21a7.5 7.5 0 0 1 15 0" /></svg>
+      {{- else if eq $icon "briefcase" -}}
+      <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M8 7V4h8v3M3 12h18M10 12v2h4v-2" /></svg>
+      {{- else -}}
+      <svg viewBox="0 0 24 24"><path d="M4 19V9l8-5 8 5v10zM9 19v-5h6v5M8 9h8" /></svg>
+      {{- end -}}
+    </span>
+    {{ $title }}
+  </h2>
+  <div class="about-panel-content">
+    {{ .Inner | markdownify }}
+  </div>
+</section>

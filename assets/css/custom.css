@@ -4,3 +4,329 @@
   object-fit: contain !important;
   background: #000;
 }
+
+/* “关于”页：桌面端双栏，移动端单栏。 */
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(230px, 280px) minmax(0, 1fr);
+  align-items: start;
+  gap: 1.25rem;
+  margin: 1.5rem 0 2.5rem;
+}
+
+/* 个人资料栏已经包含页面主标题，隐藏主题默认生成的重复标题与留白。 */
+main:has(.about-layout) > br:first-child,
+main:has(.about-layout) > h1,
+main:has(.about-layout) > h1 + div {
+  display: none;
+}
+
+/* Hextra 在 xl 断点会为普通单页预留左右各 16rem 的空栏。
+   “关于”页不使用这些栏，避免宽屏时正文反而被压缩。 */
+.hextra-max-page-width:has(.about-layout) > .hextra-sidebar-container,
+.hextra-max-page-width:has(.about-layout) > .hextra-toc {
+  display: none;
+}
+
+.hextra-max-page-width:has(.about-layout) > article > main {
+  max-width: 80rem;
+}
+
+.about-sidebar {
+  position: sticky;
+  top: 5rem;
+  overflow: hidden;
+  padding: 2rem 1.5rem;
+  border: 1px solid #d8e1e8;
+  border-radius: 1rem;
+  background:
+    radial-gradient(circle at 80% 0%, rgb(96 165 250 / 16%), transparent 34%),
+    #f4f7fa;
+  color: #334155;
+  box-shadow: 0 12px 32px rgb(15 23 42 / 10%);
+}
+
+.about-profile {
+  text-align: center;
+}
+
+.about-avatar {
+  width: 136px;
+  height: 136px;
+  margin: 0 auto;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 18%);
+}
+
+.about-name {
+  margin: 1.25rem 0 0;
+  color: #1e293b;
+  font-size: 1.55rem;
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.about-name small {
+  display: block;
+  margin-top: 0.2rem;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.about-tagline {
+  margin: 0.75rem 0 0;
+  color: #475569;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.about-sidebar-section {
+  margin-top: 1.5rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid #d8e1e8;
+}
+
+.about-sidebar-section h2 {
+  margin: 0 0 0.85rem;
+  color: #2778b8;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.about-contact-list {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-contact-list li {
+  display: grid;
+  grid-template-columns: 1.1rem minmax(0, 1fr);
+  align-items: start;
+  gap: 0.65rem;
+  color: #334155;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.about-contact-list svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.12rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.about-contact-list a,
+.about-link-list a {
+  color: inherit;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.about-contact-list a:hover,
+.about-link-list a:hover {
+  color: #1d6fa5;
+}
+
+.about-skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.about-skill-list span {
+  padding: 0.28rem 0.58rem;
+  border: 1px solid #d4dee7;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 75%);
+  color: #334155;
+  font-size: 0.76rem;
+}
+
+.about-link-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.about-link-list a {
+  padding: 0.4rem 0.7rem;
+  border: 1px solid rgb(52 152 219 / 35%);
+  border-radius: 0.5rem;
+  color: #2778b8;
+  font-size: 0.8rem;
+}
+
+.about-main {
+  display: grid;
+  min-width: 0;
+  gap: 1.25rem;
+}
+
+.about-panel {
+  min-width: 0;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 4px 16px rgb(15 23 42 / 7%);
+}
+
+.dark .about-panel {
+  border-color: #262626;
+  background: #171717;
+  box-shadow: 0 4px 18px rgb(0 0 0 / 24%);
+}
+
+.about-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 1.15rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 2px solid #3b9bdd;
+  color: #334155;
+  font-size: 1.45rem;
+  font-weight: 750;
+  line-height: 1.3;
+}
+
+.dark .about-panel-title {
+  color: #f1f5f9;
+}
+
+.about-panel-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: #3498db;
+}
+
+.about-panel-icon svg {
+  width: 1.55rem;
+  height: 1.55rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.about-panel-content {
+  color: #475569;
+  line-height: 1.75;
+}
+
+.dark .about-panel-content {
+  color: #d4d4d4;
+}
+
+.about-panel-content > :first-child {
+  margin-top: 0;
+}
+
+.about-panel-content > :last-child {
+  margin-bottom: 0;
+}
+
+.about-panel--timeline .about-panel-content > ul {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0 0 0 0.35rem;
+  padding: 0 0 0 1.35rem;
+  border-left: 2px solid #4aa3df;
+  list-style: none;
+}
+
+.about-panel--timeline .about-panel-content > ul > li {
+  position: relative;
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid #edf0f3;
+  border-radius: 0.75rem;
+  background: #f8fafc;
+  box-shadow: 0 2px 8px rgb(15 23 42 / 5%);
+}
+
+.about-panel--timeline .about-panel-content > ul > li::before {
+  position: absolute;
+  top: 1.25rem;
+  left: -1.7rem;
+  width: 0.65rem;
+  height: 0.65rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #3498db;
+  content: "";
+}
+
+.dark .about-panel--timeline .about-panel-content > ul > li {
+  border-color: #303030;
+  background: #202020;
+}
+
+.dark .about-panel--timeline .about-panel-content > ul > li::before {
+  border-color: #171717;
+}
+
+.about-panel--projects .hextra-feature-grid {
+  margin-bottom: 0;
+}
+
+@media (max-width: 800px) {
+  .about-layout {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 1rem;
+  }
+
+  .about-sidebar {
+    position: static;
+  }
+
+  .about-profile {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr);
+    column-gap: 1rem;
+    align-items: center;
+    text-align: left;
+  }
+
+  .about-avatar {
+    grid-row: span 2;
+    width: 88px;
+    height: 88px;
+    margin: 0;
+  }
+
+  .about-name {
+    align-self: end;
+    margin: 0;
+  }
+
+  .about-tagline {
+    align-self: start;
+    margin-top: 0.35rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .about-sidebar,
+  .about-panel {
+    padding: 1.15rem;
+    border-radius: 0.8rem;
+  }
+
+  .about-panel-title {
+    font-size: 1.25rem;
+  }
+}
