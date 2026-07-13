@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title description">
+  <title id="title">项目图片占位图</title>
+  <desc id="description">用于尚未添加预览图片的项目卡片</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef2ff"/>
+      <stop offset="1" stop-color="#dbeafe"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#background)"/>
+  <circle cx="1100" cy="80" r="260" fill="#ffffff" opacity="0.3"/>
+  <circle cx="120" cy="680" r="300" fill="#ffffff" opacity="0.35"/>
+  <g transform="translate(520 190)">
+    <rect width="240" height="210" rx="28" fill="none" stroke="url(#accent)" stroke-width="18"/>
+    <circle cx="76" cy="68" r="22" fill="#6366f1"/>
+    <path d="M28 174 88 112l45 43 30-29 49 48" fill="none" stroke="#3b82f6" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="640" y="485" text-anchor="middle" fill="#334155" font-family="system-ui, sans-serif" font-size="38" font-weight="600">PROJECT PREVIEW</text>
+  <text x="640" y="535" text-anchor="middle" fill="#64748b" font-family="system-ui, sans-serif" font-size="24">图片待补充</text>
+</svg>

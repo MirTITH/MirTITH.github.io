@@ -1,0 +1,52 @@
+{{- $profile := .Page.Params.profile -}}
+<div class="about-layout not-prose">
+  <aside class="about-sidebar">
+    <div class="about-profile">
+      <img class="about-avatar" src="{{ $profile.avatar }}" alt="{{ $profile.name }}" />
+      <h1 class="about-name">
+        <span>{{ $profile.name }}</span>
+        <small>{{ $profile.english_name }}</small>
+      </h1>
+      <p class="about-tagline">{{ $profile.tagline }}</p>
+    </div>
+
+    <section class="about-sidebar-section" aria-labelledby="about-contact-title">
+      <h2 id="about-contact-title">联系信息</h2>
+      <ul class="about-contact-list">
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6" /></svg>
+          <a href="mailto:{{ $profile.email }}">{{ $profile.email }}</a>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11z" /><circle cx="12" cy="10" r="2" /></svg>
+          <span>{{ $profile.location }}</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h18M5 10v8m4-8v8m6-8v8m4-8v8M3 18h18M12 3l9 5H3z" /></svg>
+          <span>{{ $profile.affiliation }}</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="about-sidebar-section" aria-labelledby="about-skills-title">
+      <h2 id="about-skills-title">技能</h2>
+      <div class="about-skill-list">
+        {{- range $profile.skills }}
+        <span>{{ . }}</span>
+        {{- end }}
+      </div>
+    </section>
+
+    <section class="about-sidebar-section" aria-labelledby="about-links-title">
+      <h2 id="about-links-title">链接</h2>
+      <div class="about-link-list">
+        <a href="{{ $profile.github }}" target="_blank" rel="noopener">GitHub</a>
+        <a href="{{ $profile.lab }}" target="_blank" rel="noopener">NROS Lab</a>
+      </div>
+    </section>
+  </aside>
+
+  <div class="about-main">
+    {{ .Inner }}
+  </div>
+</div>
