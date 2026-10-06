@@ -315,3 +315,12 @@ Plymouth 用来在系统开机时显示动画，但它有时会导致开机卡�
   ```bash
   sudo pacman -Rnsc plymouth
   ```
+
+### 开启自动清理 pacman 缓存
+
+```bash
+sudo systemctl enable --now paccache.timer
+```
+
+> 开启后，会每周清理一次 `/var/cache/pacman/pkg/` 中的旧版本包，保留最近 3 个版本。  
+> CachyOS 默认未开启该功能，这会导致 `/var/cache/pacman/pkg/` 目录越来越大。
