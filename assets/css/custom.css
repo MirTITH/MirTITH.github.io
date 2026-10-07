@@ -5,6 +5,12 @@
   background: #000;
 }
 
+.dark .media-card-tag {
+  background-color: #16334a;
+  color: #bae6fd;
+  font-weight: 600;
+}
+
 /* “关于”页：桌面端双栏，移动端单栏。 */
 .about-layout {
   display: grid;

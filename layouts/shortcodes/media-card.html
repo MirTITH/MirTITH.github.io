@@ -34,7 +34,7 @@
   <div class="hx:p-4">
     <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;">
       <span class="hx:font-semibold hx:text-gray-800 hx:dark:text-gray-100">{{ $title }}</span>
-      {{ with $tag }}<span class="hx:text-xs hx:rounded hx:px-2 hx:py-0.5 hx:bg-primary-100 hx:dark:bg-primary-900 hx:text-primary-700 hx:dark:text-primary-300 hx:whitespace-nowrap">{{ . }}</span>{{ end }}
+      {{ with $tag }}<span class="media-card-tag hx:text-xs hx:rounded hx:px-2 hx:py-0.5 hx:bg-primary-100 hx:text-primary-700 hx:whitespace-nowrap">{{ . }}</span>{{ end }}
     </div>
     <div class="hx:mt-2 hx:text-sm hx:text-gray-600 hx:dark:text-gray-400">
       {{ .Inner | markdownify }}

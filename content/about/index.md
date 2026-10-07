@@ -44,12 +44,21 @@ profile:
   {{< media-card title="双臂灵巧手零件分拣" tag="VLA" video="/videos/vla-sorting.webm" >}}
 打通双臂遥操作数据采集、π<sub>0.5</sub> 训练与实机部署全流程，累计采集 1,500+ 条有效数据，自主执行成功率超过 90%，支持长时间连续运行。
   {{< /media-card >}}
-  <!-- {{< media-card title="双臂机器人力反馈安全操作与自主恢复" tag="硕士课题" image="/images/project-placeholder.svg" >}}
-融合视觉与六维力觉进行接触风险预测与轨迹修正，并设计自主恢复策略，将 LIBERO 扰动测试成功率由 73% 提升至 83%。
-  {{< /media-card >}} -->
+  {{< media-card title="VR实时遥操作" tag="遥操作" video="/videos/woosh_tele.webm" >}}
+设计双线性映射方法控制高自由度灵巧手，提出基于滚动二次规划的 MPC 实时伺服算法实现末端低延迟跟踪
+  {{< /media-card >}}
   {{< media-card title="Qt 6 + ROS 2 数据采集与可视化程序" tag="工程项目" video="/videos/datarecorder.mp4" >}}
 独立开发机器人数据采集工具，支持实时预览、标注、回放与 LeRobot 格式转换，已累计采集 2,000+ 条遥操作数据。
   {{< /media-card >}}
+  {{< media-card title="SO-100 开源机械臂执行收纳任务" tag="VLA" video="/videos/so-100-storage.webm" >}}
+在 SO-100 上采集数据并训练 pi_0 VLA，实现自主方块抓取收纳
+  {{< /media-card >}}
+  {{< media-card title="智擎者：面向具身操作的双臂灵巧移动操作平台" tag="自研机器人" video="/videos/nbman-presentation.webm" >}}
+搭建了双臂移动底盘机器人，实现了3D鼠标、VR设备、动捕手套等多种遥操作设备控制，开发柔顺控制与自主抓取算法，实现室内外自主双臂作业。
+  {{< /media-card >}}
+  <!-- {{< media-card title="双臂机器人力反馈安全操作与自主恢复" tag="硕士课题" image="/images/project-placeholder.svg" >}}
+融合视觉与六维力觉进行接触风险预测与轨迹修正，并设计自主恢复策略，将 LIBERO 扰动测试成功率由 73% 提升至 83%。
+  {{< /media-card >}} -->
   {{< media-card title="复杂环境机械臂自主避障与抓取" tag="本科毕设" video="/videos/grasp.webm" >}}
 独立完成手眼标定、运动学解算、避障规划与抓取位姿生成，实机平均抓取成功率超过 80%。
   {{< /media-card >}}
